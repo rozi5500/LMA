@@ -1,9 +1,5 @@
 {
   "version": 2,
-  "env": {
-    "PORT": "@server_api_port",
-    "API_KEY": "@server_api_key"
-  },
   "builds": [
     {
       "src": "src/main.ts",
