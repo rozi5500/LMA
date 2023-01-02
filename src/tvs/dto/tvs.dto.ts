@@ -6,7 +6,7 @@ export class TvsDto {
   @Expose()
   id: number;
 
-  @ApiProperty({ example: '/hFFAYkK8XkvIlQss9GYxo8TOhFi.jpg' })
+  @ApiProperty()
   @Expose()
   poster_path: string;
 

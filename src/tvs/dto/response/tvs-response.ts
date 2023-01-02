@@ -15,6 +15,14 @@ export class TvsResponse {
   @ValidateNested()
   results: TvsResultResponse[];
 
+  @ApiProperty()
+  @Expose()
+  total_pages: number;
+
+  @ApiProperty()
+  @Expose()
+  total_results: number;
+
   static mapForm(tvs: TV): TvsResponse {
     return plainToClass(TvsResponse, tvs, {
       excludeExtraneousValues: true,
