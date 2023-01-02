@@ -19,14 +19,7 @@ async function bootstrap() {
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('swagger', app, document);
 
-  app.enableCors({
-    origin: [
-      'http://localhost:3000',
-      'https://library-movies-app.vercel.app/',
-      'https://sakura-iota.vercel.app/',
-    ],
-    credentials: true,
-  });
+  app.enableCors();
 
   await app.listen(PORT, () => {
     console.log(`Server is running on ${PORT} port`);
