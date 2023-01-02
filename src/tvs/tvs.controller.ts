@@ -17,4 +17,9 @@ export class TvsController {
 
     return TvsResponse.mapForm(tvs);
   }
+
+  @Get()
+  test() {
+    return 'TEST FUNCTION';
+  }
 }
