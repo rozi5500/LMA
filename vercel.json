@@ -1,8 +1,8 @@
 {
   "version": 2,
   "env": {
-    "PORT": "@port",
-    "API_KEY": "@api_key"
+    "PORT": "@server_api_port",
+    "API_KEY": "@server_api_key"
   },
   "builds": [
     {
