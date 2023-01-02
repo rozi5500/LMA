@@ -2,7 +2,6 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import * as dotenv from 'dotenv';
-import * as cors from 'cors';
 
 dotenv.config();
 
@@ -19,13 +18,6 @@ async function bootstrap() {
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('swagger', app, document);
-
-  app.use(
-    cors({
-      origin: '*',
-      methods: 'GET, POST, DELETE, PATCH',
-    }),
-  );
 
   await app.listen(PORT, () => {
     console.log(`Server is running on ${PORT} port`);
