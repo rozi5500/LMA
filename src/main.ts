@@ -23,6 +23,7 @@ async function bootstrap() {
   app.use(
     cors({
       origin: '*',
+      methods: 'GET, POST, DELETE, PATCH',
     }),
   );
 
