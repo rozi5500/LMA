@@ -1,4 +1,4 @@
-import { Controller, Get, Query } from '@nestjs/common';
+import { Controller, Get, Param, ParseIntPipe, Query } from '@nestjs/common';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { TvsService } from './tvs.service';
 import { TvsRequestQueryDto } from './dto/request/tvs-request-query.dto';
@@ -16,5 +16,11 @@ export class TvsController {
     const tvs = await this.tvsService.getPopularTVs(query);
 
     return TvsResponse.mapForm(tvs);
+  }
+
+  @Get('details/:id')
+  @ApiOperation({ summary: "[Get TV's details]" })
+  async getTVsDetails(@Param('id', ParseIntPipe) id: number) {
+    return this.tvsService.getTVById(id);
   }
 }
