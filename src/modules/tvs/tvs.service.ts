@@ -33,7 +33,7 @@ export class TvsService {
     };
   }
 
-  async getTVById(tv_id: number) {
+  async getTVById(tv_id: number): Promise<object> {
     const response = await axios.get(
       `https://api.themoviedb.org/3/tv/${tv_id}?api_key=${this.apiKey}&language=en-US`,
     );

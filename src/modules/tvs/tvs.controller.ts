@@ -12,7 +12,9 @@ export class TvsController {
   @Get('popular')
   @ApiOperation({ summary: '[GetPopularTVs]' })
   @ApiResponse({ type: TvsResponse })
-  async getPopularTVs(@Query() query: TvsRequestQueryDto) {
+  async getPopularTVs(
+    @Query() query: TvsRequestQueryDto,
+  ): Promise<TvsResponse> {
     const tvs = await this.tvsService.getPopularTVs(query);
 
     return TvsResponse.mapForm(tvs);
@@ -20,7 +22,7 @@ export class TvsController {
 
   @Get('details/:id')
   @ApiOperation({ summary: "[Get TV's details]" })
-  async getTVsDetails(@Param('id', ParseIntPipe) id: number) {
+  async getTVsDetails(@Param('id', ParseIntPipe) id: number): Promise<any> {
     return this.tvsService.getTVById(id);
   }
 }
