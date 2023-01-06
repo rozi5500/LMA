@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import axios from 'axios';
 import { TvsRequestQueryDto } from './dto/request/tvs-request-query.dto';
-import * as process from 'process';
 import { CountryEnum } from '../../enums/country-enums';
+import { pathMaker } from '../common/helpers/path-maker';
 
 @Injectable()
 export class TvsService {
@@ -12,7 +12,6 @@ export class TvsService {
     const popularTVs = await axios.get(
       `https://api.themoviedb.org/3/tv/popular?api_key=${this.apiKey}&language=en-US&page=${query.page}`,
     );
-    const posterPathDomen = 'https://image.tmdb.org/t/p/w500';
 
     popularTVs.data.results = popularTVs.data.results.filter((elem) => {
       for (const country of elem.origin_country) {
@@ -20,12 +19,7 @@ export class TvsService {
       }
     });
 
-    const results = popularTVs.data.results.map((tv) => {
-      return {
-        ...tv,
-        poster_path: posterPathDomen + tv.poster_path,
-      };
-    });
+    const results = pathMaker(popularTVs.data.results);
 
     return {
       ...popularTVs.data,
