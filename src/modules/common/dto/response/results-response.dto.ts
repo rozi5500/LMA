@@ -8,7 +8,11 @@ export class ResultsResponse {
 
   @ApiProperty()
   @Expose()
-  title: string;
+  title?: string;
+
+  @ApiProperty()
+  @Expose()
+  name?: string;
 
   @ApiProperty()
   @Expose()
