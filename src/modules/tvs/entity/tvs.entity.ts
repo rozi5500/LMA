@@ -12,4 +12,5 @@ export class TV {
   vote_count: number;
   name: string;
   original_name: string;
+  media_type?: string;
 }

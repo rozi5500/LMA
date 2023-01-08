@@ -25,4 +25,8 @@ export class ResultsResponse {
   @ApiProperty()
   @Expose()
   backdrop_path: number;
+
+  @ApiProperty()
+  @Expose()
+  media_type: string;
 }

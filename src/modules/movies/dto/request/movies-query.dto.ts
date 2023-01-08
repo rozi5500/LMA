@@ -6,9 +6,3 @@ export class MoviesPagination {
   @IsOptional()
   page: number;
 }
-
-export class MoviesQueryDto extends MoviesPagination {
-  @ApiPropertyOptional()
-  @IsOptional()
-  query: string;
-}
