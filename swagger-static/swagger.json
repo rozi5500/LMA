@@ -1,0 +1,264 @@
+{
+  "openapi": "3.0.0",
+  "paths": {
+    "/commons/search": {
+      "get": {
+        "operationId": "CommonsController_getMoviesAndTVsBySearch",
+        "summary": "[Get movies and TVs by search]",
+        "parameters": [
+          {
+            "name": "page",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "query",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "commons"
+        ]
+      }
+    },
+    "/movies/popular": {
+      "get": {
+        "operationId": "MoviesController_getPopularMovies",
+        "summary": "[Get popular movies]",
+        "parameters": [
+          {
+            "name": "page",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MoviesResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "movies"
+        ]
+      }
+    },
+    "/tv/popular": {
+      "get": {
+        "operationId": "TvsController_getPopularTVs",
+        "summary": "[GetPopularTVs]",
+        "parameters": [
+          {
+            "name": "page",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "minimum": 1,
+              "maximum": 500,
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TvsResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "tv"
+        ]
+      }
+    },
+    "/tv/details/{id}": {
+      "get": {
+        "operationId": "TvsController_getTVsDetails",
+        "summary": "[Get TV's details]",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "tv"
+        ]
+      }
+    }
+  },
+  "info": {
+    "title": "Library-movies API",
+    "description": "API movies library documentation for Nick and Vasiliy",
+    "version": "1.0",
+    "contact": {}
+  },
+  "tags": [
+    {
+      "name": "movies",
+      "description": ""
+    }
+  ],
+  "servers": [],
+  "components": {
+    "schemas": {
+      "MoviesResultsResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "title": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "poster_path": {
+            "type": "string"
+          },
+          "vote_average": {
+            "type": "number"
+          },
+          "backdrop_path": {
+            "type": "number"
+          },
+          "media_type": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "title",
+          "name",
+          "poster_path",
+          "vote_average",
+          "backdrop_path",
+          "media_type"
+        ]
+      },
+      "MoviesResponse": {
+        "type": "object",
+        "properties": {
+          "page": {
+            "type": "number"
+          },
+          "results": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MoviesResultsResponse"
+            }
+          },
+          "total_results": {
+            "type": "number"
+          },
+          "total_pages": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "page",
+          "results",
+          "total_results",
+          "total_pages"
+        ]
+      },
+      "TvsResultResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "title": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "poster_path": {
+            "type": "string"
+          },
+          "vote_average": {
+            "type": "number"
+          },
+          "backdrop_path": {
+            "type": "number"
+          },
+          "media_type": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "title",
+          "name",
+          "poster_path",
+          "vote_average",
+          "backdrop_path",
+          "media_type"
+        ]
+      },
+      "TvsResponse": {
+        "type": "object",
+        "properties": {
+          "page": {
+            "type": "number"
+          },
+          "results": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TvsResultResponse"
+            }
+          },
+          "total_pages": {
+            "type": "number"
+          },
+          "total_results": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "page",
+          "results",
+          "total_pages",
+          "total_results"
+        ]
+      }
+    }
+  }
+}
