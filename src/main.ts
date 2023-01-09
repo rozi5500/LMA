@@ -2,8 +2,6 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import * as dotenv from 'dotenv';
-import { resolve } from 'path';
-import { writeFileSync } from 'fs';
 
 dotenv.config();
 
@@ -27,6 +25,7 @@ async function bootstrap() {
       'http://localhost:5173',
       'http://localhost:3000',
       'https://sakura-iota.vercel.app',
+      'http://192.168.1.107:5173',
     ],
     credentials: true,
   });
@@ -34,18 +33,5 @@ async function bootstrap() {
   await app.listen(PORT, () => {
     console.log(`Server is running on ${PORT} port`);
   });
-
-  if (process.env.NODE_ENV === 'development') {
-    const pathToSwaggerStaticFolder = resolve(process.cwd(), 'swagger-static');
-
-    // write swagger json file
-    const pathToSwaggerJson = resolve(
-      pathToSwaggerStaticFolder,
-      'swagger.json',
-    );
-    const swaggerJson = JSON.stringify(document, null, 2);
-    writeFileSync(pathToSwaggerJson, swaggerJson);
-    console.log(`Swagger JSON file written to: '/swagger-static/swagger.json'`);
-  }
 }
 bootstrap();
