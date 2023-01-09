@@ -17,10 +17,7 @@ async function bootstrap() {
     .addTag('movies')
     .build();
   const document = SwaggerModule.createDocument(app, config);
-  SwaggerModule.setup('swagger', app, document, {
-    customCssUrl: '/public/swagger-ui.css',
-    customSiteTitle: 'The Words That I Know API - Swagger',
-  });
+  SwaggerModule.setup('swagger', app, document);
 
   app.enableCors({
     allowedHeaders: ['content-type'],
