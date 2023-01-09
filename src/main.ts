@@ -17,7 +17,9 @@ async function bootstrap() {
     .addTag('movies')
     .build();
   const document = SwaggerModule.createDocument(app, config);
-  SwaggerModule.setup('swagger', app, document);
+  SwaggerModule.setup('swagger', app, document, {
+    customCss: '.swagger-ui .topbar { display: none }',
+  });
 
   app.enableCors({
     allowedHeaders: ['content-type'],
