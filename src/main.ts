@@ -18,7 +18,8 @@ async function bootstrap() {
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('swagger', app, document, {
-    customCss: '.swagger-ui .topbar { display: none }',
+    customCssUrl: '/public/swagger-ui.css',
+    customSiteTitle: 'The Words That I Know API - Swagger',
   });
 
   app.enableCors({
