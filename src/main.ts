@@ -26,6 +26,8 @@ async function bootstrap() {
       'http://localhost:3000',
       'https://sakura-iota.vercel.app',
       'http://192.168.1.107:5173',
+      'https://sakura-wyousefsaid.vercel.app',
+      'https://sakura-git-main-wyousefsaid.vercel.app',
     ],
     credentials: true,
   });

@@ -2,7 +2,10 @@ import { Injectable } from '@nestjs/common';
 import axios from 'axios';
 import { TvsRequestQueryDto } from './dto/request/tvs-request-query.dto';
 import { CountryEnum } from '../../common/enums/country-enums';
-import { pathMaker } from '../../common/helpers/path-maker';
+import {
+  pathMaker,
+  pathMakerForOneEntity,
+} from '../../common/helpers/path-maker';
 
 @Injectable()
 export class TvsService {
@@ -29,11 +32,26 @@ export class TvsService {
     };
   }
 
-  async getTVById(tv_id: number): Promise<object> {
+  async getTVById(tv_id: number, appendToResponse: string): Promise<any> {
     const response = await axios.get(
-      `https://api.themoviedb.org/3/tv/${tv_id}?api_key=${this.apiKey}&language=en-US`,
+      `https://api.themoviedb.org/3/tv/${tv_id}?api_key=${this.apiKey}&append_to_response=${appendToResponse}`,
+    );
+    const tv = pathMakerForOneEntity(response.data);
+    const MIN_VOTE_AVERAGE = 5;
+    const trailerType = 'Trailer';
+
+    const trailerTypeVideos = tv?.videos?.results.filter(
+      (video) => video.type === trailerType,
     );
 
-    return response.data;
+    const filteredImagesByVoteAverage = tv?.images?.backdrops.filter(
+      (image) => image.vote_average > MIN_VOTE_AVERAGE,
+    );
+
+    return {
+      ...tv,
+      videos: { results: trailerTypeVideos },
+      images: { backdrops: filteredImagesByVoteAverage },
+    };
   }
 }
