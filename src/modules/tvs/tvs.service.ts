@@ -38,11 +38,6 @@ export class TvsService {
     );
     const tv = pathMakerForOneEntity(response.data);
     const MIN_VOTE_AVERAGE = 5;
-    const trailerType = 'Trailer';
-
-    const trailerTypeVideos = tv?.videos?.results.filter(
-      (video) => video.type === trailerType,
-    );
 
     const filteredImagesByVoteAverage = tv?.images?.backdrops.filter(
       (image) => image.vote_average > MIN_VOTE_AVERAGE,
@@ -50,7 +45,6 @@ export class TvsService {
 
     return {
       ...tv,
-      videos: { results: trailerTypeVideos },
       images: { backdrops: filteredImagesByVoteAverage },
     };
   }
